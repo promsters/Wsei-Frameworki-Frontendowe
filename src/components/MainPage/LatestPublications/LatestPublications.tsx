@@ -9,6 +9,7 @@ import {media} from "../../../styledHelpers/Breakpoints";
 import LatestBixBg from "./skyscrappers.jpg";
 import {Colors} from "../../../styledHelpers/Colors";
 import AuthorLabel from "../../Account/AuthorLabel/AuthorLabel";
+import {Link} from "react-router-dom";
 
 const Container = styled.div`
     display: flex;
@@ -89,7 +90,7 @@ const LatestPublications = () => {
                 setState({loading: false, publications: json})
             })
         ;
-    });
+    }, []);
 
     return(
         <div>
@@ -116,7 +117,7 @@ const LatestPublications = () => {
                                 </div>
                             </LatestRecord>
                         ))}
-                        <a href={"#"}>See more publications</a>
+                        <Link to={"/publications"}>See more publications</Link>
                     </LatestList>
                 </Container>
             )}

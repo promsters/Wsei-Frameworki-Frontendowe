@@ -6,11 +6,11 @@ import ResumeWork from "../components/MainPage/ResumeWork/ResumeWork";
 
 const Main = () => {
     return(
-        <MainWrapper>
+        <>
             <LatestPublications/>
             <Workspaces/>
             <ResumeWork/>
-        </MainWrapper>
+        </>
     )
 }
 

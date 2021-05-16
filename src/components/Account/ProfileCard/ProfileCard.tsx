@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 
+import {Link} from "react-router-dom";
+
 import {Button} from "../../Utils/Button";
 
 import {Colors} from "../../../styledHelpers/Colors";
@@ -54,17 +56,17 @@ const Links = styled.div`
         display: flex;
         align-items: center;
         justify-content: space-between;
-        
-        a {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            
-            span {
-                padding: 5px 10px;
-                width: 100%;
-            }
-        }
+    }
+`;
+
+const StyledLink = styled(Link)`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    span {
+        padding: 5px 10px;
+        width: 100%;
     }
 `;
 
@@ -94,17 +96,17 @@ const ProfileCard = () => {
             }
             <Links>
                 <div>
-                    <a href={"#"}>
+                    <StyledLink to={"/network"}>
                         <img src={networkIcon} />
                         <span>Your network</span>
-                    </a>
+                    </StyledLink>
                     <Button icon={networkAddIcon} iconAlt={"Add user to network"} />
                 </div>
                 <div>
-                    <a href={"#"}>
+                    <StyledLink to={"/publications"}>
                         <img src={networkIcon} />
                         <span>Your Publications</span>
-                    </a>
+                    </StyledLink>
                     <Button icon={addIcon} iconAlt={"Add publication"} />
                 </div>
             </Links>

@@ -8,16 +8,15 @@ import workspaceHeaderImage from "./signing.jpg";
 import {BorderRadius} from "../../../styledHelpers/Border";
 import {Colors} from "../../../styledHelpers/Colors";
 import {BoxShadow} from "../../../styledHelpers/BoxShadow";
+import ScrollContainer from "react-indiana-drag-scroll";
 
-const List = styled.div`
+const List = styled(ScrollContainer)`
     display: flex;
     flex-direction: row;
     
     > *:not(:first-child) {
         margin-left: 10px;
     }
-    
-    overflow-x: scroll;
 `;
 
 const Workspace = styled.div`
@@ -76,7 +75,7 @@ const Workspaces = () => {
     return(
         <div>
             <MainPageBlockHeader>Workspaces</MainPageBlockHeader>
-            <List>
+            <List vertical={false} hideScrollbars={false}>
                 <Workspace>
                     <HeaderRow/>
                     <TitleRow>

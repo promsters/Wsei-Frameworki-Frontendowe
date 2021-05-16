@@ -1,13 +1,21 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import homeIcon from "./home.svg";
 import {DownArrow} from "../../../../styledHelpers/Arrow";
+import InnerMenu from "./InnerMenu";
+import {media} from "../../../../styledHelpers/Breakpoints";
+import {Colors} from "../../../../styledHelpers/Colors";
 
-const Menu = styled.div`
-    display: flex;
-    align-items: center;
+const MenuContainer = styled.div`
+    position: relative;
     height: 100%;
     width: 20%;
+`;
+
+const MenuPointer = styled.div`
+    cursor: pointer;
+    display: flex;
+    align-items: center;
     
     img {
         width: auto;
@@ -21,14 +29,52 @@ const Menu = styled.div`
         margin-left: auto;
     }
 `;
+
+const MenuContent = styled.div`
+    width: 100vw;
+    position: fixed;
+    top: 32px;
+    left: 0;
+    
+    height: 100vh;
+    
+    border: 1px solid ${Colors.grayLight};
+    background-color: ${Colors.white};
+    
+    ${media.desktop`
+        position: absolute;
+        width: 70%;
+        left: initial;
+        right: 0;
+        height: auto;
+    `}
+`;
+
 const TopMenu = () => {
+    const [state, setState] = useState<MenuState>({open: false});
+
+    const clickHandler = () => {
+        setState({open: !state.open});
+    };
+
     return(
-        <Menu>
-            <img src={homeIcon} alt="Home" />
-            <span>Home</span>
-            <DownArrow/>
-        </Menu>
+        <MenuContainer>
+            <MenuPointer onClick={clickHandler}>
+                <img src={homeIcon} alt="Home" />
+                <span>Home</span>
+                <DownArrow/>
+            </MenuPointer>
+            {state.open && (
+                <MenuContent>
+                    <InnerMenu/>
+                </MenuContent>
+            )}
+        </MenuContainer>
     );
 };
+
+interface MenuState {
+    open: boolean;
+}
 
 export default TopMenu;

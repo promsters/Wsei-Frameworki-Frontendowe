@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import ProfileCard from "../../Account/ProfileCard/ProfileCard";
 
+import {Link} from "react-router-dom";
+
 import ecosystemIcon from "./ecosystem.svg";
 import entityIcon from "./entities2.svg";
 
@@ -15,16 +17,16 @@ const Links = styled.div`
     display: flex;
     flex-direction: column;
     padding: 10px;
+`;
+
+const StyledLink = styled(Link)`
+    margin-left: 20px;
+    display: flex;
+    width: 100%;
+    padding: 10px;
     
-    a {
-        margin-left: 20px;
-        display: flex;
-        width: 100%;
-        padding: 10px;
-        
-        img {
-            margin-right: 10px;
-        }
+    img {
+        margin-right: 10px;
     }
 `;
 
@@ -33,18 +35,18 @@ const SideBar = ({className}: SideBarProps) => {
         <div className={className}>
             <ProfileCard />
             <Links>
-                <a href={"#"}>
+                <StyledLink to={"/publications"}>
                     <img src={entityIcon} />
                     <span>Publications</span>
-                </a>
-                <a href={"#"}>
+                </StyledLink>
+                <StyledLink to={"/ecosystem"}>
                     <img src={ecosystemIcon} />
                     <span>Ecosystem</span>
-                </a>
-                <a href={"#"}>
+                </StyledLink>
+                <StyledLink to={"/entities"}>
                     <img src={entityIcon} />
                     <span>Entities</span>
-                </a>
+                </StyledLink>
             </Links>
         </div>
     );
