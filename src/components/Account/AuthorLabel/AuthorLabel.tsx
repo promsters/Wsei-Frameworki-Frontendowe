@@ -7,7 +7,8 @@ import {Colors} from "../../../styledHelpers/Colors";
 import {BoxShadow} from "../../../styledHelpers/BoxShadow";
 import {BorderRadius} from "../../../styledHelpers/Border";
 
-import UserApi, {User} from "../../../api/User";
+import UserApi from "../../../api/User";
+import {User} from "../../../entities/User";
 
 const Container = styled.span`
     display: inline-flex;

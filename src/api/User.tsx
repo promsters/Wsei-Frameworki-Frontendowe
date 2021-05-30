@@ -1,3 +1,5 @@
+import {User} from "../entities/User";
+
 class UserApi {
     static async getUserData(userId: number): Promise<User> {
         const userResponse = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);
@@ -7,17 +9,6 @@ class UserApi {
 
         return {...userData, ...{avatar: photoData.thumbnailUrl}} as User;
     }
-}
-
-export interface User {
-    loading: boolean;
-    name: string;
-    company: UserCompany;
-    avatar: string;
-}
-
-export interface UserCompany {
-    name: string;
 }
 
 export default UserApi;

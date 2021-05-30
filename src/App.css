@@ -2,12 +2,8 @@ body {
     background-color: #f5f7f9;
 }
 
-a:link {
+a {
     text-decoration: none;
-    color: black;
-}
-
-a:visited {
     color: black;
 }
 

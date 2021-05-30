@@ -12,7 +12,9 @@ import {BorderRadius} from "../../../styledHelpers/Border";
 import networkIcon from "./network.png";
 import networkAddIcon from "./network.svg";
 import addIcon from "./plus.svg";
-import UserApi, {User} from "../../../api/User";
+import {useDispatch, useSelector} from "react-redux";
+import {IState} from "../../../reducers";
+import {getUser} from "../../../actions/userActions";
 
 
 const Container = styled.div`
@@ -70,28 +72,24 @@ const StyledLink = styled(Link)`
     }
 `;
 
-interface UserState {
-    loading: boolean;
-    user: User;
-}
-
 const ProfileCard = () => {
-    const userId = 6
-    const [state, setState] = useState<UserState>({loading: true} as UserState);
+    const userState = useSelector((state: IState) => state.user);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        UserApi.getUserData(userId)
-            .then(user => setState({loading: false, user: user}));
+        dispatch(getUser(6));
     }, []);
 
     return(
         <Container>
-            {state.loading && <div>Loading...</div>}
-            {!state.loading &&
+            {userState.loading && <div>Loading...</div>}
+            {!userState.loading &&
                 <Summary>
-                    <img src={state.user.avatar} alt={"profile photo"}/>
-                    <h1>{state.user.name}</h1>
-                    <span>Job title - {state.user.company.name}</span>
+                    <Link to={"/profile"}>
+                        <img src={userState.user.avatar} alt={"profile photo"}/>
+                        <h1>{userState.user.name}</h1>
+                    </Link>
+                    <span>Job title - {userState.user.company.name}</span>
                 </Summary>
             }
             <Links>
