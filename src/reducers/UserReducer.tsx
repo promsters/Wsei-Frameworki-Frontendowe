@@ -21,7 +21,6 @@ const defaultState = (): IUserReducer => ({
 export default (state = defaultState(), action: any) => {
     switch (action.type) {
         case actionTypes.GET_USER: {
-            console.log(state);
             return {
                 ...state,
                 loading: false,

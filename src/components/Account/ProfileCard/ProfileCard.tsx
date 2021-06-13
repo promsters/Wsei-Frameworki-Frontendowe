@@ -72,6 +72,12 @@ const StyledLink = styled(Link)`
     }
 `;
 
+const StyledProfileLink = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const ProfileCard = () => {
     const userState = useSelector((state: IState) => state.user);
     const dispatch = useDispatch();
@@ -85,10 +91,10 @@ const ProfileCard = () => {
             {userState.loading && <div>Loading...</div>}
             {!userState.loading &&
                 <Summary>
-                    <Link to={"/profile"}>
+                    <StyledProfileLink to={"/profile"}>
                         <img src={userState.user.avatar} alt={"profile photo"}/>
                         <h1>{userState.user.name}</h1>
-                    </Link>
+                    </StyledProfileLink>
                     <span>Job title - {userState.user.company.name}</span>
                 </Summary>
             }

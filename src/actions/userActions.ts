@@ -12,3 +12,12 @@ export const getUser = (userId: number) => async (dispatch: Dispatch) => {
         })
     })
 };
+
+export const getAllUsers = () => async (dispatch: Dispatch) => {
+    UserApi.getAllUsersData().then((users: User[]) => {
+        dispatch({
+            type: actionTypes.GET_ALL_USERS,
+            payload: users
+        })
+    });
+};

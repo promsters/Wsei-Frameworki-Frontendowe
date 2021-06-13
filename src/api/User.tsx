@@ -9,6 +9,13 @@ class UserApi {
 
         return {...userData, ...{avatar: photoData.thumbnailUrl}} as User;
     }
+
+    static async getAllUsersData(): Promise<User[]> {
+        const userResponse = await fetch(`https://jsonplaceholder.typicode.com/users`);
+        const usersData = await userResponse.json();
+
+        return usersData;
+    }
 }
 
 export default UserApi;
