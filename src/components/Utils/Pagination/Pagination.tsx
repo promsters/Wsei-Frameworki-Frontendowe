@@ -8,6 +8,7 @@ interface PaginationProps {
     previousLabel: string;
     nextLabel: string;
     onPageChange: Function;
+    maxVisiblePages?: number;
 }
 
 const Container = styled.div`
@@ -52,7 +53,10 @@ const Pagination = (props: PaginationProps) => {
             {state.currentPage > 1 && (
                 <span data-page={state.currentPage-1} onClick={onPageClickHandler}>{props.previousLabel}</span>
             )}
-            {Array.from({length: props.pageCount}, (_, i) => i + 1).map((x) => (
+            {Array.from({length: Math.min((props.maxVisiblePages ?? 20), props.pageCount)}, (_, i) => {
+                const start = (state.currentPage-((props.maxVisiblePages ?? 20)/2));
+                return i + (start > 0 ? start : 1);
+            }).map((x) => (
                 <span
                     data-page={x}
                     className={classNames({active: state.currentPage === x})}

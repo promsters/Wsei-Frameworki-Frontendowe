@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCog, faThLarge, faBars, faSortDown} from "@fortawesome/free-solid-svg-icons";
+import {faCog, faThLarge, faBars, faSortDown, faEllipsisH, faSortAmountUp, faFilter, faShare, faExpandAlt} from "@fortawesome/free-solid-svg-icons";
 import {faDotCircle} from "@fortawesome/free-regular-svg-icons";
 import {Colors} from "../../../styledHelpers/Colors";
 
@@ -35,14 +35,19 @@ const ButtonIcon = styled(FontAwesomeIcon)`
     margin: 0 5px 0 5px;
 `;
 
-const Button = styled.div`
+interface ButtonProps {
+    color?: string;
+    bgColor?: string;
+}
+
+const Button = styled.div<ButtonProps>`
     display: flex;
     justify-content: center;
     align-items: center;
     
     cursor: pointer;
-    background-color: ${Colors.lightBlue3};
-    color: ${Colors.blue};
+    background-color: ${props => props.bgColor ? props.bgColor : Colors.lightBlue3};
+    color: ${props => props.color ? props.color : Colors.blue};
     padding: 7px;
     font-weight: bold;
     font-size: 12px;
@@ -85,6 +90,12 @@ const ButtonGroup = styled.div`
 
 const FiltersRow = styled.div`
     display: flex;
+    margin-bottom: 10px;
+`;
+
+const Separator = styled.div`
+  width: 1px;
+  border-right: 1px solid #e8e8e8;
 `;
 
 const EntitiesFilters = () => {
@@ -112,6 +123,27 @@ const EntitiesFilters = () => {
                     <ButtonIcon icon={faDotCircle} />
                     All
                     <ButtonIcon icon={faSortDown} />
+                </Button>
+                <Button bgColor={"transparent"}>
+                    <ButtonIcon icon={faEllipsisH} />
+                </Button>
+                <Separator />
+                <Button bgColor={"transparent"} color={"#96999e"}>
+                    <ButtonIcon icon={faSortAmountUp} color={"#96999e"} />
+                    Sort
+                </Button>
+                <Button bgColor={"transparent"} color={"#96999e"}>
+                    <ButtonIcon icon={faFilter} color={"#96999e"} />
+                    Filters
+                </Button>
+                <Separator />
+                <Button bgColor={"transparent"} color={"#96999e"}>
+                    <ButtonIcon icon={faExpandAlt} color={"#96999e"} />
+                </Button>
+                <Separator />
+                <Button bgColor={"transparent"} color={"#96999e"}>
+                    <ButtonIcon icon={faShare} color={"#96999e"} />
+                    Share
                 </Button>
             </FiltersRow>
         </div>
