@@ -15,7 +15,6 @@ const Container = styled.div`
 const Entities = () => {
     return(
         <Container>
-            <EntitiesFilters />
             <EntitiesList />
         </Container>
     )
