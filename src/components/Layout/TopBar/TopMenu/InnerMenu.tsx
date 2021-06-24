@@ -9,6 +9,9 @@ import peopleIcon from "./people.svg";
 import entitiesIcon from "../../SideBar/entities2.svg";
 import administrationIcon from "./administration.svg";
 import privacyIcon from "./privacy.svg";
+import {useSelector} from "react-redux";
+import {IState} from "../../../../reducers";
+import {Workspace} from "../../../../entities/Workspace";
 
 const Container = styled.div`
     display: flex;
@@ -66,6 +69,8 @@ const LogoutButton = styled.div`
 `;
 
 const InnerMenu = () => {
+    const workspaces = useSelector((state: IState) => state.workspaces.workspaces);
+
     return(
         <Container>
             <FilterRow>
@@ -76,30 +81,28 @@ const InnerMenu = () => {
                 <StyledLink to={"/"}>
                     <img src={homeIcon} />Home
                 </StyledLink>
-                <StyledLink to={"/publications"}>
+                <StyledLink to={"/not-found"}>
                     <img src={homeIcon} />Publications
                 </StyledLink>
-                <StyledLink to={"/404"}>
+                <StyledLink to={"/not-found"}>
                     <img src={peopleIcon} />People
                 </StyledLink>
                 <StyledLink to={"/entities"}>
                     <img src={entitiesIcon} />Entities
                 </StyledLink>
-                <StyledLink to={"/404"}>
+                <StyledLink to={"/not-found"}>
                     <img src={administrationIcon} />Administration
                 </StyledLink>
                 <Header>Workspaces</Header>
-                <StyledLink to={"/404"}><img src={entitiesIcon} />Client contract</StyledLink>
-                <StyledLink to={"/404"}><img src={entitiesIcon} />Supplier contract</StyledLink>
-                <StyledLink to={"/404"}><img src={entitiesIcon} />Corporate</StyledLink>
-                <StyledLink to={"/404"}><img src={entitiesIcon} />Group Norms</StyledLink>
-                <StyledLink to={"/404"}><img src={entitiesIcon} />Real estate contracts</StyledLink>
+                {workspaces.map((workspace: Workspace) => (
+                    <StyledLink key={workspace.id} to={`/workspace/${workspace.slug}`}><img src={entitiesIcon} />{workspace.name}</StyledLink>
+                ))}
             </FilterContainer>
             <Header>Account</Header>
-            <StyledLink to={"/404"}>
+            <StyledLink to={"/not-found"}>
                 <img src={privacyIcon} />Privacy
             </StyledLink>
-            <StyledLink to={"/404"}>
+            <StyledLink to={"/not-found"}>
                 <img src={privacyIcon} />Settings
             </StyledLink>
             <LogoutButton>

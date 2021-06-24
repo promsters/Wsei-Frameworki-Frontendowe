@@ -58,6 +58,7 @@ const Pagination = (props: PaginationProps) => {
                 return i + (start > 0 ? start : 1);
             }).map((x) => (
                 <span
+                    key={x}
                     data-page={x}
                     className={classNames({active: state.currentPage === x})}
                     onClick={onPageClickHandler}

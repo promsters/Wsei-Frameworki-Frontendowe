@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {IState} from "../../../reducers";
 import Pagination from "../../Utils/Pagination/Pagination";
@@ -6,6 +6,8 @@ import Pagination from "../../Utils/Pagination/Pagination";
 import styled, {css} from "styled-components";
 import EntitiesFilters from "../Filters/EntitiesFilters";
 import {Colors} from "../../../styledHelpers/Colors";
+import {Photo} from "../../../entities/Photo";
+import {EntitiesDisplayType} from "../../../entities/EntitiesList";
 
 const Container = styled.div<{fullscreen: boolean}>`
     ${props => props.fullscreen && css`
@@ -47,7 +49,7 @@ const EntitiesContainer = styled.div<{list: boolean}>`
 
 const Entity = styled.div`
   flex: 0 0 calc(25% - 2px - 15px);
-  border: 1px solid #f4f4f6;
+  border: 1px solid ${Colors.whiteDark};
   border-radius: 20px;
   background-color: ${Colors.white};
   
@@ -69,7 +71,7 @@ const Entity = styled.div`
   }
   
   h1 {
-    color: #2a3f9d;
+    color: ${Colors.blue};
     font-size: 15px;
     margin: 2px;
   }
@@ -90,14 +92,19 @@ const EntityImage = styled.div`
   flex: 0 0 30%;
 `;
 
-const EntitiesList = () => {
-    const ITEMS_PER_PAGE = 30;
+interface EntitiesListProps {
+    entities: Photo[];
+    displayType: EntitiesDisplayType;
+    fullscreen: boolean;
+}
+
+const EntitiesList = (props: EntitiesListProps) => {
+    const ITEMS_PER_PAGE = 32;
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const photos = useSelector((state: IState) => state.photos);
-    const filtersState = useSelector((state: IState) => state.entitiesList.filters);
 
     const getTotalPages = (): number => {
-        return Math.ceil(photos.photos.length/ITEMS_PER_PAGE);
+        console.log(props.entities.length, props.entities.length/ITEMS_PER_PAGE);
+        return Math.ceil(props.entities.length/ITEMS_PER_PAGE);
     }
 
     const onPageChangeHandler = (page: number) => {
@@ -105,24 +112,26 @@ const EntitiesList = () => {
     }
 
     return (
-        <Container fullscreen={filtersState.fullscreen}>
+        <Container fullscreen={props.fullscreen}>
             <EntitiesFilters />
-            <EntitiesContainer list={filtersState.displayType === 'list'}>
-            {photos.photos.slice(currentPage*ITEMS_PER_PAGE, (currentPage+1)*ITEMS_PER_PAGE).map((photo) => (
-                <Entity key={photo.id}>
-                    <EntityImage>
-                        <img src={photo.thumbnailUrl} />
-                    </EntityImage>
-                    <div>
-                        <h1>{photo.album.title}</h1>
-                        <span>{photo.title}</span>
-                    </div>
-                </Entity>
-            ))}
-            </EntitiesContainer>
-            {!photos.loading &&
-                <Pagination pageCount={getTotalPages()} maxVisiblePages={10} nextLabel={"NEXT"} previousLabel={"PREVIOUS"}
-                            onPageChange={onPageChangeHandler}/>
+            {props.entities.length > 0 &&
+                <>
+                    <EntitiesContainer list={props.displayType === 'list'}>
+                        {props.entities.slice((currentPage-1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE).map((photo) => (
+                            <Entity key={photo.id}>
+                                <EntityImage>
+                                    <img src={photo.thumbnailUrl}/>
+                                </EntityImage>
+                                <div>
+                                    <h1>{photo.album.title}</h1>
+                                    <span>{photo.title}</span>
+                                </div>
+                            </Entity>
+                        ))}
+                    </EntitiesContainer>
+                    <Pagination pageCount={getTotalPages()} maxVisiblePages={10} nextLabel={"NEXT"} previousLabel={"PREVIOUS"}
+                    onPageChange={onPageChangeHandler}/>
+                </>
             }
         </Container>
     );

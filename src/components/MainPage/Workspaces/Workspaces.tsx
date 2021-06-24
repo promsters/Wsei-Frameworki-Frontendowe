@@ -9,6 +9,10 @@ import {BorderRadius} from "../../../styledHelpers/Border";
 import {Colors} from "../../../styledHelpers/Colors";
 import {BoxShadow} from "../../../styledHelpers/BoxShadow";
 import ScrollContainer from "react-indiana-drag-scroll";
+import {useSelector} from "react-redux";
+import {IState} from "../../../reducers";
+import {Workspace} from "../../../entities/Workspace";
+import {Link} from "react-router-dom";
 
 const List = styled(ScrollContainer)`
     display: flex;
@@ -19,7 +23,7 @@ const List = styled(ScrollContainer)`
     }
 `;
 
-const Workspace = styled.div`
+const WorkspaceElement = styled.div`
     width: 24%;
     min-width: 200px;
     border-radius: ${BorderRadius.box};
@@ -72,122 +76,32 @@ const UpdateRow = styled.div`
 `;
 
 const Workspaces = () => {
+    const workspaces = useSelector((state: IState) => state.workspaces.workspaces);
+
     return(
         <div>
             <MainPageBlockHeader>Workspaces</MainPageBlockHeader>
             <List vertical={false} hideScrollbars={false}>
-                <Workspace>
-                    <HeaderRow/>
-                    <TitleRow>
-                        <div>
-                            <img src={typeImage}/>
-                        </div>
-                        <h2>Client contract</h2>
-                    </TitleRow>
-                    <DescRow>
-                        <span>Contract</span>
-                        <span>150 users</span>
-                    </DescRow>
-                    <UpdateRow>
-                        Last update 2 days ago
-                    </UpdateRow>
-                </Workspace>
-                <Workspace>
-                    <HeaderRow/>
-                    <TitleRow>
-                        <div>
-                            <img src={typeImage}/>
-                        </div>
-                        <h2>Client contract</h2>
-                    </TitleRow>
-                    <DescRow>
-                        <span>Contract</span>
-                        <span>150 users</span>
-                    </DescRow>
-                    <UpdateRow>
-                        Last update 2 days ago
-                    </UpdateRow>
-                </Workspace>
-                <Workspace>
-                    <HeaderRow/>
-                    <TitleRow>
-                        <div>
-                            <img src={typeImage}/>
-                        </div>
-                        <h2>Client contract</h2>
-                    </TitleRow>
-                    <DescRow>
-                        <span>Contract</span>
-                        <span>150 users</span>
-                    </DescRow>
-                    <UpdateRow>
-                        Last update 2 days ago
-                    </UpdateRow>
-                </Workspace>
-                <Workspace>
-                    <HeaderRow/>
-                    <TitleRow>
-                        <div>
-                            <img src={typeImage}/>
-                        </div>
-                        <h2>Client contract</h2>
-                    </TitleRow>
-                    <DescRow>
-                        <span>Contract</span>
-                        <span>150 users</span>
-                    </DescRow>
-                    <UpdateRow>
-                        Last update 2 days ago
-                    </UpdateRow>
-                </Workspace>
-                <Workspace>
-                    <HeaderRow/>
-                    <TitleRow>
-                        <div>
-                            <img src={typeImage}/>
-                        </div>
-                        <h2>Client contract</h2>
-                    </TitleRow>
-                    <DescRow>
-                        <span>Contract</span>
-                        <span>150 users</span>
-                    </DescRow>
-                    <UpdateRow>
-                        Last update 2 days ago
-                    </UpdateRow>
-                </Workspace>
-                <Workspace>
-                    <HeaderRow/>
-                    <TitleRow>
-                        <div>
-                            <img src={typeImage}/>
-                        </div>
-                        <h2>Client contract</h2>
-                    </TitleRow>
-                    <DescRow>
-                        <span>Contract</span>
-                        <span>150 users</span>
-                    </DescRow>
-                    <UpdateRow>
-                        Last update 2 days ago
-                    </UpdateRow>
-                </Workspace>
-                <Workspace>
-                    <HeaderRow/>
-                    <TitleRow>
-                        <div>
-                            <img src={typeImage}/>
-                        </div>
-                        <h2>Client contract</h2>
-                    </TitleRow>
-                    <DescRow>
-                        <span>Contract</span>
-                        <span>150 users</span>
-                    </DescRow>
-                    <UpdateRow>
-                        Last update 2 days ago
-                    </UpdateRow>
-                </Workspace>
+                {workspaces.map((workspace: Workspace) => (
+                    <WorkspaceElement key={workspace.id}>
+                        <Link to={`/workspace/${workspace.slug}`}>
+                            <HeaderRow/>
+                            <TitleRow>
+                                <div>
+                                    <img src={typeImage}/>
+                                </div>
+                                <h2>{workspace.name}</h2>
+                            </TitleRow>
+                            <DescRow>
+                                <span>{workspace.type}</span>
+                                <span>{workspace.people} users</span>
+                            </DescRow>
+                            <UpdateRow>
+                                Last update {workspace.lastUpdated}
+                            </UpdateRow>
+                        </Link>
+                    </WorkspaceElement>
+                ))}
             </List>
         </div>
     );

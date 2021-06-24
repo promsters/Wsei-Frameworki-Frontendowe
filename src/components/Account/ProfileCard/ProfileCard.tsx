@@ -31,7 +31,7 @@ const Summary = styled.div`
     align-items: center;
     
     color: ${Colors.grayBlue};
-    padding: 20px 0px 20px 0px;
+    padding: 20px 0 20px 0;
     
     border-bottom: 1px solid ${Colors.grayLight};
     

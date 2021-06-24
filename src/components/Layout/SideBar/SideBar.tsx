@@ -35,11 +35,11 @@ const SideBar = ({className}: SideBarProps) => {
         <div className={className}>
             <ProfileCard />
             <Links>
-                <StyledLink to={"/publications"}>
+                <StyledLink to={"/not-found"}>
                     <img src={entityIcon} />
                     <span>Publications</span>
                 </StyledLink>
-                <StyledLink to={"/ecosystem"}>
+                <StyledLink to={"/not-found"}>
                     <img src={ecosystemIcon} />
                     <span>Ecosystem</span>
                 </StyledLink>

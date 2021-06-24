@@ -2,9 +2,8 @@ import React from "react";
 
 import styled from "styled-components";
 
-import EntitiesFilters from "../components/Entities/Filters/EntitiesFilters";
-import EntitiesList from "../components/Entities/List/EntitiesList";
 import {Colors} from "../styledHelpers/Colors";
+import EntitiesContainer from "../components/Entities/EntitiesContainer";
 
 const Container = styled.div`
     background-color: ${Colors.white};
@@ -15,7 +14,7 @@ const Container = styled.div`
 const Entities = () => {
     return(
         <Container>
-            <EntitiesList />
+            <EntitiesContainer />
         </Container>
     )
 }

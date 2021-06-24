@@ -22,6 +22,15 @@ class PostApi {
             resolve(comments);
         });
     }
+
+    static async getAllPostComments(postId: number): Promise<Comment[]> {
+        const commentsResponse = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`);
+        const comments: Comment[] = await commentsResponse.json();
+
+        return new Promise<Comment[]>((resolve, reject) => {
+            resolve(comments);
+        });
+    }
 }
 
 export interface Post {

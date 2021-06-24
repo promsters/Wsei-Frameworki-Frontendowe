@@ -106,7 +106,7 @@ const LatestPublications = () => {
                     <LatestList>
                         <h3>Latest publications</h3>
                         {state.publications.slice(1, 4).map((publication) => (
-                            <LatestRecord>
+                            <LatestRecord key={publication.id}>
                                 <img src={LatestBixBg} alt={"Photo"}/>
                                 <div>
                                     <h4>{publication.title}</h4>
@@ -117,7 +117,7 @@ const LatestPublications = () => {
                                 </div>
                             </LatestRecord>
                         ))}
-                        <Link to={"/publications"}>See more publications</Link>
+                        <Link to={"/not-found"}>See more publications</Link>
                     </LatestList>
                 </Container>
             )}
