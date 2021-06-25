@@ -33,7 +33,7 @@ const StyledLink = styled(Link)`
 const SideBar = ({className}: SideBarProps) => {
     return(
         <div className={className}>
-            <ProfileCard />
+            <ProfileCard simpleView={false} />
             <Links>
                 <StyledLink to={"/not-found"}>
                     <img src={entityIcon} />

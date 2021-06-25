@@ -78,13 +78,62 @@ const StyledProfileLink = styled(Link)`
   align-items: center;
 `;
 
-const ProfileCard = () => {
+
+const SimpleContainer = styled.div`
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  
+  img {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+  }
+  
+  div {
+    display: flex;
+    flex-direction: column;
+    
+    span {
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+`;
+
+const SimpleLink = styled(Link)`
+  font-size: 13px;
+  color: ${Colors.blue2};
+`;
+
+interface ProfileCardProps {
+    simpleView: boolean;
+}
+
+const ProfileCard = (props: ProfileCardProps) => {
     const userState = useSelector((state: IState) => state.user);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getUser(6));
     }, []);
+
+    if (props.simpleView) {
+        return (
+            <>
+                {userState.loading && <div>Loading...</div>}
+                {!userState.loading &&
+                <SimpleContainer>
+                    <img src={userState.user.avatar} alt={"profile photo"}/>
+                    <div>
+                        <span>{userState.user.name}</span>
+                        <SimpleLink to={"/profile"}>See profile</SimpleLink>
+                    </div>
+                </SimpleContainer>
+                }
+            </>
+        );
+    }
 
     return(
         <Container>

@@ -35,7 +35,7 @@ const defaultState = (): IWorkspacesReducer => ({
             name: 'Corporate',
             slug: 'corporate',
             people: 130,
-            type: WorkspaceType.Contract,
+            type: WorkspaceType.Corporate,
             lastUpdated: '32 days ago',
             comments: [],
             commentsLoading: true,

@@ -11,20 +11,21 @@ interface WorkspaceIconProps {
     color: string;
 }
 
-const WorkspaceIcon = (props: WorkspaceIconProps) => {
-    const getWorkspaceIcon = (type: WorkspaceType): IconProp => {
-        switch (type) {
-            case WorkspaceType.Contract:
-                return faFileSignature;
-            case WorkspaceType.Corporate:
-                return faBuilding;
-            case WorkspaceType.Norms:
-                return faBook;
-        }
-    };
 
+export const GetWorkspaceIcon = (type: WorkspaceType): IconProp => {
+    switch (type) {
+        case WorkspaceType.Contract:
+            return faFileSignature;
+        case WorkspaceType.Corporate:
+            return faBuilding;
+        case WorkspaceType.Norms:
+            return faBook;
+    }
+};
+
+const WorkspaceIcon = (props: WorkspaceIconProps) => {
     return (
-        <FontAwesomeIcon icon={getWorkspaceIcon(props.type)} size={props.size} color={props.color}/>
+        <FontAwesomeIcon icon={GetWorkspaceIcon(props.type)} size={props.size} color={props.color}/>
     );
 };
 

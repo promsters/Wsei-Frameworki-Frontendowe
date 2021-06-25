@@ -1,17 +1,14 @@
-import React from "react";
+import React, {ChangeEvent, useState} from "react";
 import styled from "styled-components";
 import {Colors} from "../../../../styledHelpers/Colors";
 
 import {Link} from "react-router-dom";
 
-import homeIcon from "./home.svg";
-import peopleIcon from "./people.svg";
-import entitiesIcon from "../../SideBar/entities2.svg";
-import administrationIcon from "./administration.svg";
 import privacyIcon from "./privacy.svg";
-import {useSelector} from "react-redux";
-import {IState} from "../../../../reducers";
-import {Workspace} from "../../../../entities/Workspace";
+
+import {MenuItem, MenuSection} from "./TopMenu";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import ProfileCard from "../../../Account/ProfileCard/ProfileCard";
 
 const Container = styled.div`
     display: flex;
@@ -68,37 +65,61 @@ const LogoutButton = styled.div`
     border-top: 1px solid ${Colors.grayLight};
 `;
 
-const InnerMenu = () => {
-    const workspaces = useSelector((state: IState) => state.workspaces.workspaces);
+const InnerMenu = (props: {sections: MenuSection[]}) => {
+    const [filterKeyword, setFilterKeyword] = useState<string | null>(null);
+
+    const getFilteredSections = (): MenuSection[] => {
+        if (filterKeyword === null) {
+            return props.sections;
+        }
+
+        console.log('ehe');
+
+        return props.sections.map((section: MenuSection) => {
+            return {
+                label: section.label,
+                items: section.items.filter((item: MenuItem) => {
+                    return item.label.toLowerCase().indexOf(filterKeyword.toLowerCase()) !== -1;
+                })
+            };
+        })
+    };
+
+    const onFilterKeywordChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+
+        setFilterKeyword(event.target.value);
+    };
 
     return(
         <Container>
             <FilterRow>
-                <input type={"text"} placeholder={"Filter..."}/>
+                <input type={"text"} placeholder={"Filter..."} onChange={onFilterKeywordChange} />
             </FilterRow>
             <FilterContainer>
-                <Header>Platform</Header>
-                <StyledLink to={"/"}>
-                    <img src={homeIcon} />Home
-                </StyledLink>
-                <StyledLink to={"/not-found"}>
-                    <img src={homeIcon} />Publications
-                </StyledLink>
-                <StyledLink to={"/not-found"}>
-                    <img src={peopleIcon} />People
-                </StyledLink>
-                <StyledLink to={"/entities"}>
-                    <img src={entitiesIcon} />Entities
-                </StyledLink>
-                <StyledLink to={"/not-found"}>
-                    <img src={administrationIcon} />Administration
-                </StyledLink>
-                <Header>Workspaces</Header>
-                {workspaces.map((workspace: Workspace) => (
-                    <StyledLink key={workspace.id} to={`/workspace/${workspace.slug}`}><img src={entitiesIcon} />{workspace.name}</StyledLink>
+                {getFilteredSections().map((section: MenuSection) => (
+                    <div key={section.label}>
+                        <Header>{section.label}</Header>
+                        {section.items.map((item: MenuItem) => (
+                            <>
+                                {(item.invisible === undefined || !item.invisible) && (
+                                    <StyledLink key={item.label} to={item.path}>
+                                        {item.icon !== undefined && (
+                                            <img src={item.icon} />
+                                        )}
+                                        {item.faIcon !== undefined && (
+                                            <FontAwesomeIcon icon={item.faIcon} />
+                                        )}
+                                        {item.label}
+                                    </StyledLink>
+                                )}
+                            </>
+                        ))}
+                    </div>
                 ))}
             </FilterContainer>
             <Header>Account</Header>
+            <ProfileCard simpleView={true} />
             <StyledLink to={"/not-found"}>
                 <img src={privacyIcon} />Privacy
             </StyledLink>

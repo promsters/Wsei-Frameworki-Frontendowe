@@ -10,14 +10,10 @@ import notificationsIcon from "./bell.svg";
 const Bar = styled.div`
     background-color: #fff;
     height: 30px;
-    padding: 5px 15px 5px 15px;
+    padding: 0 15px 0 15px;
     display: flex;
     margin-bottom: 20px;
     justify-content: space-between;
-    
-    > *:not(:first-child) {
-        padding-left: 20px;
-    }
     
     > img {
         width: auto;
@@ -27,7 +23,7 @@ const Bar = styled.div`
 
 const SearchInput = styled.input`
     width: 30%;
-    margin-left: 10%;
+    margin-left: 20%;
 `;
 
 const UserIcons = styled.div`
