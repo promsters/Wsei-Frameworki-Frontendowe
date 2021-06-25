@@ -12,6 +12,8 @@ import {Colors} from "../../../styledHelpers/Colors";
 import {useDispatch, useSelector} from "react-redux";
 import {IState} from "../../../reducers";
 import FiltersModal from "./FiltersModal";
+import {SearchInput} from "../../../styledHelpers/SearchInput";
+import {Button, ButtonGroup, ButtonIcon} from "../../../styledHelpers/Button";
 
 const Left = styled.div``;
 const Right = styled.div``;
@@ -37,73 +39,6 @@ const SettingsIcon = styled(FontAwesomeIcon)`
     cursor: pointer;
 `;
 
-const ButtonIcon = styled(FontAwesomeIcon)`
-    font-size: 14px;
-    margin: 0 5px 0 5px;
-`;
-
-interface ButtonProps {
-    color?: string;
-    borderColor?: string;
-    bgColor?: string;
-    active: boolean;
-}
-
-const Button = styled.div<ButtonProps>`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    position: relative;
-    
-    cursor: pointer;
-    background-color: ${props => props.bgColor ? props.bgColor : Colors.lightBlue3};
-    color: ${props => props.color ? props.color : Colors.blue};
-    padding: 7px;
-    font-weight: bold;
-    font-size: 12px;
-    
-    border-radius: 10%;
-    
-    > ${ButtonIcon}:not(:last-child) {
-        margin-left: 0;
-    }
-    
-    > ${ButtonIcon}:not(:first-child) {
-        margin-right: 0;
-    }
-    
-    border: 0 solid ${props => props.borderColor ? props.borderColor : 'transparent'};
-    
-    ${props => !props.active && `
-        span {
-            display: none;
-        }
-        
-        ${ButtonIcon} {
-            color: ${Colors.grayMedium};
-        }
-        
-        background-color: ${Colors.white};
-        border-width: 1px;
-    `}
-`;
-
-const ButtonGroup = styled.div`
-    display: flex;
-    
-    > ${Button}:not(:last-child) {
-        border-right: none;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-    }
-    
-    > ${Button}:not(:first-child) {
-        border-left: none;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-    }
-`;
 
 const FiltersRow = styled.div`
     display: flex;
@@ -117,22 +52,6 @@ const FiltersLeftContainer = styled.div`
 
 const FiltersRightContainer = styled.div`
   display: flex;
-`;
-
-const SearchInput = styled.div`
-  border: 1px solid #e5e5e5;
-  border-radius: 10px;
-  padding: 0 10px 0 0;
-  
-  input {
-    padding: 10px;
-    border: none;
-    background-color: transparent;;
-    
-    &:focus {
-      outline-width: 0;
-    }
-  }
 `;
 
 const Separator = styled.div<{margin?: boolean}>`
@@ -240,7 +159,7 @@ const EntitiesFilters = () => {
                         <FontAwesomeIcon icon={faSearch} />
                     </SearchInput>
                     <Separator margin={true} />
-                    <ButtonComponent title={"Followed"} fsIcon={faSatelliteDish}/>
+                    <ButtonComponent title={"Followed"} fsIcon={faSatelliteDish} color={Colors.blue2}/>
                 </FiltersRightContainer>
             </FiltersRow>
         </div>

@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes/workspaceTypes';
-import {Workspace} from "../entities/Workspace";
+import {Workspace, WorkspaceType} from "../entities/Workspace";
 
 export interface IWorkspacesReducer {
     workspaces: Workspace[];
@@ -13,50 +13,55 @@ const defaultState = (): IWorkspacesReducer => ({
             name: 'Client contract',
             slug: 'client-contract',
             people: 20,
-            type: 'Contract',
+            type: WorkspaceType.Contract,
             lastUpdated: '2 days ago',
             comments: [],
-            commentsLoading: true
+            commentsLoading: true,
+            headerImage: 'https://www.munizzilaw.com/content/uploads/posts/120/5-things-to-consider-when-signing-a-contract.jpg'
         },
         {
             id: 2,
             name: 'Supplier contract',
             slug: 'supplier-contract',
             people: 3,
-            type: 'Contract',
+            type: WorkspaceType.Contract,
             lastUpdated: '5 days ago',
             comments: [],
-            commentsLoading: true
+            commentsLoading: true,
+            headerImage: 'https://www.munizzilaw.com/content/uploads/posts/120/5-things-to-consider-when-signing-a-contract.jpg'
         },
         {
             id: 3,
             name: 'Corporate',
             slug: 'corporate',
             people: 130,
-            type: 'Corporate',
+            type: WorkspaceType.Contract,
             lastUpdated: '32 days ago',
             comments: [],
-            commentsLoading: true
+            commentsLoading: true,
+            headerImage: 'https://2iuddx2bbvyd177ma3mydy2j-wpengine.netdna-ssl.com/wp-content/uploads/2017/10/corporate-meeting-room-with-video-conferencing-and-collaboration-tools-1080x675.jpg'
         },
         {
             id: 4,
             name: 'Group Norms',
             slug: 'group-norms',
             people: 21,
-            type: 'Norms',
+            type: WorkspaceType.Norms,
             lastUpdated: '1 hour ago',
             comments: [],
-            commentsLoading: true
+            commentsLoading: true,
+            headerImage: 'https://images.techhive.com/images/article/2015/09/library-100616524-large.jpg'
         },
         {
             id: 5,
             name: 'Real estate contracts',
             slug: 'real-estate-contracts',
             people: 12,
-            type: 'Contract',
+            type: WorkspaceType.Contract,
             lastUpdated: '3 days ago',
             comments: [],
-            commentsLoading: true
+            commentsLoading: true,
+            headerImage: 'https://www.munizzilaw.com/content/uploads/posts/120/5-things-to-consider-when-signing-a-contract.jpg'
         }
     ],
     loading: false

@@ -1,6 +1,11 @@
 import {Comment} from "../api/Post";
 
-export type WorkspaceType = "Corporate" | "Contract" | "Norms";
+export enum WorkspaceType {
+    "Corporate" = "Corporate",
+    "Contract" = "Contract",
+    "Norms" = "Norms"
+}
+
 
 export interface Workspace {
     id: number;
@@ -11,4 +16,5 @@ export interface Workspace {
     lastUpdated: string;
     comments: Comment[];
     commentsLoading: boolean;
+    headerImage: string;
 }

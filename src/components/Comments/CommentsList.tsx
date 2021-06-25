@@ -9,6 +9,9 @@ import styled from "styled-components";
 import {BorderRadius} from "../../styledHelpers/Border";
 import {BoxShadow} from "../../styledHelpers/BoxShadow";
 import {Colors} from "../../styledHelpers/Colors";
+import AuthorLabel from "../Account/AuthorLabel/AuthorLabel";
+import WorkspaceIcon from "../Workspace/WorkspaceIcon";
+import {WorkspaceType} from "../../entities/Workspace";
 
 
 const Element = styled.div`
@@ -17,7 +20,7 @@ const Element = styled.div`
     background-color: white;
     padding: 7px 15px 7px 15px;
     border-radius: ${BorderRadius.boxSmall};
-    box-shadow: ${BoxShadow.box};
+    box-shadow: ${BoxShadow.boxSm};
     
     h4 {
         margin: 0;
@@ -71,23 +74,28 @@ const CommentsList = (props: CommentsListProps) => {
     return (
         <>
             <List>
-                {props.comments.slice((page-1)*props.perPage, page*props.perPage).map((comment: Comment) => (
+                {props.comments.slice((page-1)*props.perPage, page*props.perPage).map((comment: Comment) => {
+                    const enumValues = Object.values(WorkspaceType);
+                    const workspaceType = enumValues[Math.floor(Math.random() * enumValues.length)];
+
+                    return (
                     <Element key={comment.id}>
                         <h4>{comment.name}</h4>
                         <p>{comment.body}</p>
                         <ElementFooter>
                             <span>
-                                {comment.email}
+                                <AuthorLabel userId={comment.postId}/>
                             </span>
                             <span>
-                                Corporate
+                                <WorkspaceIcon type={workspaceType} size={"sm"} color={Colors.grayMedium3}/>
+                                {workspaceType}
                             </span>
                             <span>
                                 Updated 3 days ago by John Doe
                             </span>
                         </ElementFooter>
                     </Element>
-                ))}
+                    )})}
 
             </List>
             <Pagination pageCount={getTotalPages()} nextLabel={"NEXT"} previousLabel={"PREVIOUS"}

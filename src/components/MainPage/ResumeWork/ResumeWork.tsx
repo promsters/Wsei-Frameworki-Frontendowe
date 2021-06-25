@@ -8,25 +8,22 @@ import {Colors} from "../../../styledHelpers/Colors";
 import PostApi, {Comment} from "../../../api/Post";
 import Pagination from "../../Utils/Pagination/Pagination";
 import CommentsList from "../../Comments/CommentsList";
+import {SearchInput} from "../../../styledHelpers/SearchInput";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faSatelliteDish, faSearch} from "@fortawesome/free-solid-svg-icons";
+import {Button as ButtonComponent} from "../../Utils/Button";
 
 const Header = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 10px 0 10px 0;
+    
+    div {
+      display: flex;
+      gap: 20px;
+    }
 `;
-
-const FilterInput = styled.input`
-    padding: 3px;
-    margin-right: 20px;
-    outline: none;
-    border: 1px solid black;
-    border-radius: 3px;
-`;
-
-const FollowedButton = styled.button`
-
-`;
-
 
 const ResumeWork = () => {
     const [comments, setComments] = useState<CommentsState>({
@@ -56,10 +53,11 @@ const ResumeWork = () => {
             <Header>
                 <MainPageBlockHeader>Resume your work</MainPageBlockHeader>
                 <div>
-                    <FilterInput placeholder={"Filter by title..."} onChange={onFilterKeywordChange} />
-                    <FollowedButton>
-                        Followed
-                    </FollowedButton>
+                    <SearchInput>
+                        <input type={"text"} placeholder={"Filter by title..."} onChange={onFilterKeywordChange}/>
+                        <FontAwesomeIcon icon={faSearch} />
+                    </SearchInput>
+                    <ButtonComponent title={"Followed"} fsIcon={faSatelliteDish} bgColor={Colors.transparent} color={Colors.blue2} borderColor={Colors.transparent}/>
                 </div>
             </Header>
 

@@ -7,6 +7,7 @@ export const Colors = {
     grayDark: '#292929',
     blue: '#2a3f9d',
     blue2: '#384ba3',
+    blueDark: '#232c47',
     black: '#000000',
     lightBlue: '#aad8ff',
     lightBlue2: '#0072ce',
@@ -14,5 +15,13 @@ export const Colors = {
     lightBlue3: '#eaecf5',
     grayMedium: '#878b91',
     grayMedium2: '#96999e',
-    whiteDark: '#f4f4f6'
+    grayMedium3: '#787d8e',
+    whiteDark: '#f4f4f6',
+    transparent: 'transparent',
+    greenLight: '#cce5cc',
+    green: '#409f40',
+    blueLight: '#edf6fa',
+    blueMedium: '#2e96c9',
+    orangeLight: '#f2e5c4',
+    orange: '#d8ad47'
 };
